@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Comparison Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0071e3;
+            --primary-dark: #005bb5;
+            --accent: #34c759;
+            --bg: #f9fafb;
+            --card-bg: #fff;
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            --border-radius: 24px;
+            --step-bg: #f1f3f6;
+        }
+        body { font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container {
+            max-width: 900px;
+            margin: 2.5rem auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+        .stepper {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 2.2rem;
+        }
+        .step {
+            background: var(--step-bg);
+            border-radius: 12px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1.01rem;
+            color: #555;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2.1rem;
+        }
+        .cards {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2.2rem;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1 1 320px;
+            background: #f7fafd;
+            border-radius: 22px;
+            padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            text-align: center;
+            border: 2.5px solid transparent;
+            transition: border 0.2s, box-shadow 0.2s, transform 0.18s;
+            position: relative;
+        }
+        .card.selected {
+            border: 2.5px solid var(--primary);
+            background: #eaf4ff;
+            transform: scale(1.03);
+        }
+        .card.best {
+            border: 2.5px solid var(--accent);
+            background: #eafcf1;
+            box-shadow: 0 8px 32px rgba(52,199,89,0.13);
+            transform: scale(1.05);
+        }
+        .card h3 {
+            margin-bottom: 1.1rem;
+            font-size: 1.35rem;
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .tax-amount {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .label {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 0.7rem;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.98rem;
+            font-weight: 500;
+            margin-top: 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+        .badge.selected {
+            background: #222;
+        }
+        .summary {
+            text-align: center;
+            font-size: 1.13rem;
+            margin-top: 2.2rem;
+            color: #222;
+            background: #f7fafd;
+            border-radius: 14px;
+            padding: 1.1rem 0.5rem 1rem 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .back-btn, .advice-btn {
+            display: block;
+            margin: 2.2rem auto 0;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.95rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.13rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,113,227,0.13);
+        }
+        .advice-btn {
+            background: var(--accent);
+        }
+        .back-btn:hover, .advice-btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 8px 32px rgba(0,113,227,0.18);
+        }
+        .advice-btn:hover {
+            background: #1ecb6b;
+        }
+        @media (max-width: 900px) {
+            .container { margin: 1.2rem 0.5rem; }
+            .cards { gap: 1.2rem; }
+        }
+        @media (max-width: 700px) {
+            .cards { flex-direction: column; gap: 1.2rem; }
+            .card { padding: 1.3rem 1rem; }
+        }
+        @media (max-width: 500px) {
+            .container { padding: 1.2rem 0.2rem; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="stepper">
+        <div class="step">📤 Upload</div>
+        <div class="step">📝 Review</div>
+        <div class="step active">⚖️ Compare</div>
+        <div class="step">🤖 AI Advice</div>
+    </div>
+    <h2>Tax Regime Comparison</h2>
+    <div class="cards">
+        <div class="card {% if selected_regime == 'old' %}selected{% endif %} {% if comparison.best_regime == 'old' %}best{% endif %}">
+            <h3> <span>🧾</span> Old Regime</h3>
+            <div class="tax-amount">₹{{ comparison.tax_old_regime }}</div>
+            <div class="label">Your tax under Old Regime</div>
+            {% if comparison.best_regime == 'old' %}
+            <div class="badge">Best for you</div>
+            {% endif %}
+            {% if selected_regime == 'old' %}
+            <div class="badge selected">You selected this regime</div>
+            {% endif %}
+        </div>
+        <div class="card {% if selected_regime == 'new' %}selected{% endif %} {% if comparison.best_regime == 'new' %}best{% endif %}">
+            <h3> <span>✨</span> New Regime</h3>
+            <div class="tax-amount">₹{{ comparison.tax_new_regime }}</div>
+            <div class="label">Your tax under New Regime</div>
+            {% if comparison.best_regime == 'new' %}
+            <div class="badge">Best for you</div>
+            {% endif %}
+            {% if selected_regime == 'new' %}
+            <div class="badge selected">You selected this regime</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="summary">
+        <strong>Session ID:</strong> {{ session_id }}<br>
+        <strong>Selected Regime:</strong> {{ selected_regime|capitalize }}<br>
+        <strong>Best Regime:</strong> {{ comparison.best_regime|capitalize }}<br>
+    </div>
+    <form action="/advisor" method="get">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <button class="advice-btn" type="submit">Get Personalized Advice</button>
+    </form>
+    <form action="/" method="get">
+        <button class="back-btn" type="submit">Back to Home</button>
+    </form>
+</div>
+</body>
+</html> 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Advisor - Tax Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #059669;
+            --bg: #f5f7fa;
+            --card-bg: #fff;
+            --card-shadow: 0 8px 32px rgba(37,99,235,0.08);
+            --border-radius: 18px;
+        }
+        body { font-family: 'Aptos', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container {
+            max-width: 540px;
+            margin: 2.5rem auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2.2rem 1.5rem 2rem 1.5rem;
+        }
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        .desc {
+            color: #334155;
+            font-size: 1.08rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .info-card {
+            background: #e0e7ff;
+            border-radius: 12px;
+            padding: 1.2rem 1rem 1rem 1rem;
+            color: var(--primary-dark);
+            font-size: 1.07rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.07);
+        }
+        .form-title {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            text-align: center;
+        }
+        .field {
+            margin-bottom: 1.1rem;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #334155;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus {
+            border: 1.5px solid var(--primary);
+            outline: none;
+            background: #fff;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.13);
+            font-family: 'Aptos', sans-serif;
+            margin-top: 0.5rem;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            box-shadow: 0 8px 32px rgba(37,99,235,0.18);
+        }
+        .or {
+            text-align: center;
+            color: #64748b;
+            margin: 1.2rem 0 1.2rem 0;
+            font-size: 1rem;
+        }
+        .back-btn {
+            display: block;
+            margin: 2.2rem auto 0;
+            background: #64748b;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.13);
+        }
+        .back-btn:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>AI Advisor</h2>
+    <div class="desc">
+        <strong>Get personalized, actionable investment and tax-saving suggestions powered by Google Gemini AI.</strong>
+    </div>
+    <div class="info-card">
+        <ul style="padding-left:1.2rem;">
+            <li>After you complete a tax comparison, you can get AI-powered advice tailored to your data.</li>
+            <li>The AI will ask a smart follow-up question, then provide 3-5 actionable suggestions.</li>
+            <li>All advice is generated in real-time using Gemini 1.5 Flash.</li>
+        </ul>
+    </div>
+    <div class="form-title">Already have a session?</div>
+    <form method="get" action="/advisor">
+        <div class="field">
+            <label for="session_id">Enter your Session ID</label>
+            <input type="text" name="session_id" id="session_id" placeholder="Paste your session ID here..." required>
+        </div>
+        <button class="btn" type="submit">Continue to AI Advisor</button>
+    </form>
+    <div class="or">or</div>
+    <form action="/upload" method="get">
+        <button class="btn" style="background:#059669;" type="submit">Start a New Session</button>
+    </form>
+    <form action="/" method="get">
+        <button class="back-btn" type="submit">Back to Home</button>
+    </form>
+</div>
+</body>
+</html> 

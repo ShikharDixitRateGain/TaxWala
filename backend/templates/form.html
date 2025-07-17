@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Review - Tax Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0071e3;
+            --primary-dark: #005bb5;
+            --accent: #34c759;
+            --bg: #f9fafb;
+            --card-bg: #fff;
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            --border-radius: 24px;
+            --step-bg: #f1f3f6;
+        }
+        body { font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container {
+            max-width: 540px;
+            margin: 2.5rem auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2.5rem 1.5rem 2.2rem 1.5rem;
+        }
+        .stepper {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 2.2rem;
+        }
+        .step {
+            background: var(--step-bg);
+            border-radius: 12px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1.01rem;
+            color: #555;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        .section-title {
+            color: #222;
+            font-size: 1.13rem;
+            font-weight: 600;
+            margin-top: 2.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .error { color: #e11d48; margin-bottom: 1rem; text-align: center; }
+        .success { color: var(--accent); font-weight: 500; margin-bottom: 1rem; text-align: center; }
+        .note {
+            color: var(--primary-dark);
+            background: #e0e7ff;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+        form {
+            margin-bottom: 2rem;
+        }
+        .field-group {
+            background: #f7fafd;
+            border-radius: 16px;
+            padding: 1.2rem 1rem 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .field {
+            margin-bottom: 1.1rem;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #334155;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus {
+            border: 1.5px solid var(--primary);
+            outline: none;
+            background: #fff;
+        }
+        input[type="file"] {
+            font-size: 1rem;
+            padding: 0.5rem 0;
+        }
+        .regime-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+        .regime-group label {
+            font-weight: 400;
+            color: #555;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            padding: 0.95rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.13rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,113,227,0.13);
+            font-family: 'Aptos', sans-serif;
+            margin-top: 0.5rem;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            box-shadow: 0 8px 32px rgba(0,113,227,0.18);
+        }
+        .raw-text {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.97rem;
+            color: #64748b;
+            margin-top: 1.5rem;
+            word-break: break-word;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 1.2rem 0.5rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="stepper">
+        <div class="step active">📤 Upload</div>
+        <div class="step">📝 Review</div>
+        <div class="step">⚖️ Compare</div>
+        <div class="step">🤖 AI Advice</div>
+    </div>
+    <h2>Start Your Tax Analysis</h2>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    {% if reviewed %}<div class="success">Data submitted successfully!</div>{% endif %}
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="section-title">Step 1: Upload PDF</div>
+        <div class="field-group">
+            <div class="field">
+                <label for="pdf_file">Select PDF file:</label>
+                <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" required>
+            </div>
+        </div>
+        <button class="btn" type="submit">Upload & Extract</button>
+    </form>
+    {% if extracted %}
+    <form method="POST" action="/calculate">
+        <div class="section-title">Step 2: Review & Edit Extracted Data</div>
+        {% if extracted.note %}
+        <div class="note">{{ extracted.note }}</div>
+        {% endif %}
+        <div class="field-group">
+            <div class="field">
+                <label for="gross_salary">Gross Salary</label>
+                <input type="text" name="gross_salary" id="gross_salary" value="{{ extracted.gross_salary }}">
+            </div>
+            <div class="field">
+                <label for="basic_salary">Basic Salary</label>
+                <input type="text" name="basic_salary" id="basic_salary" value="{{ extracted.basic_salary }}">
+            </div>
+            <div class="field">
+                <label for="hra_received">HRA Received</label>
+                <input type="text" name="hra_received" id="hra_received" value="{{ extracted.hra_received }}">
+            </div>
+            <div class="field">
+                <label for="rent_paid">Rent Paid</label>
+                <input type="text" name="rent_paid" id="rent_paid" value="{{ extracted.rent_paid }}">
+            </div>
+            <div class="field">
+                <label for="deduction_80c">Deduction 80C</label>
+                <input type="text" name="deduction_80c" id="deduction_80c" value="{{ extracted.deduction_80c }}">
+            </div>
+            <div class="field">
+                <label for="deduction_80d">Deduction 80D</label>
+                <input type="text" name="deduction_80d" id="deduction_80d" value="{{ extracted.deduction_80d }}">
+            </div>
+            <div class="field">
+                <label for="standard_deduction">Standard Deduction</label>
+                <input type="text" name="standard_deduction" id="standard_deduction" value="{{ extracted.standard_deduction }}">
+            </div>
+            <div class="field">
+                <label for="professional_tax">Professional Tax</label>
+                <input type="text" name="professional_tax" id="professional_tax" value="{{ extracted.professional_tax }}">
+            </div>
+            <div class="field">
+                <label for="tds">TDS</label>
+                <input type="text" name="tds" id="tds" value="{{ extracted.tds }}">
+            </div>
+            <div class="field">
+                <label>Preferred Tax Regime</label>
+                <div class="regime-group">
+                    <label><input type="radio" name="selected_regime" value="old" required> Old Regime</label>
+                    <label><input type="radio" name="selected_regime" value="new" required> New Regime</label>
+                </div>
+            </div>
+        </div>
+        <button class="btn" type="submit">Continue</button>
+    </form>
+    <div class="raw-text">
+        <strong>Extracted Text (debug):</strong><br>
+        {{ extracted.raw_text }}
+    </div>
+    {% endif %}
+</div>
+</body>
+</html> 

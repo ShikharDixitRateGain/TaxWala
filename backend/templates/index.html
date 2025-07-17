@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Advisor - Smart Tax Analysis & Planning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0071e3;
+            --primary-dark: #005bb5;
+            --accent: #34c759;
+            --bg: #f9fafb;
+            --card-bg: #fff;
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            --border-radius: 24px;
+            --step-bg: #f1f3f6;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            margin: 0;
+            color: #222;
+        }
+        .hero {
+            max-width: 900px;
+            margin: 3rem auto 2rem auto;
+            padding: 3rem 2rem 2.5rem 2rem;
+            background: linear-gradient(135deg, #fafdff 0%, #f1f3f6 100%);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            filter: drop-shadow(0 2px 8px rgba(0,113,227,0.08));
+        }
+        .logo {
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .description {
+            font-size: 1.08rem;
+            color: #6e6e73;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .step {
+            background: var(--step-bg);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            min-width: 160px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.02rem;
+            color: #444;
+        }
+        .step-icon {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .features {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .feature {
+            flex: 1 1 260px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+            cursor: pointer;
+            border: 1.5px solid #f1f3f6;
+            position: relative;
+        }
+        .feature:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 12px 32px rgba(0,113,227,0.13);
+            border: 1.5px solid var(--primary);
+        }
+        .feature h3 {
+            font-size: 1.18rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #222;
+        }
+        .feature p {
+            font-size: 1.01rem;
+            color: #6e6e73;
+            margin-bottom: 1.2rem;
+        }
+        .feature .start-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,113,227,0.13);
+            font-family: 'Aptos', sans-serif;
+        }
+        .feature .start-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            box-shadow: 0 8px 32px rgba(0,113,227,0.18);
+        }
+        .feature .start-button[style*="background:#059669"] {
+            background: linear-gradient(135deg, var(--accent) 0%, #1ecb6b 100%);
+        }
+        .footer {
+            margin-top: 2.5rem;
+            font-size: 1.01rem;
+            color: #b0b0b5;
+            text-align: center;
+        }
+        @media (max-width: 900px) {
+            .hero { margin: 2rem 1rem 1.5rem 1rem; }
+            .features { gap: 1.2rem; }
+            .steps { gap: 1.2rem; }
+        }
+        @media (max-width: 700px) {
+            .features { flex-direction: column; gap: 1.2rem; }
+            .feature { padding: 1.3rem 1rem; }
+            .steps { flex-direction: column; gap: 1.2rem; }
+        }
+        @media (max-width: 500px) {
+            .hero { padding: 1.2rem 0.5rem; }
+            .logo { font-size: 2.1rem; }
+            .tagline { font-size: 1.1rem; }
+        }
+        .feature-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .feature-link .feature {
+            transition: box-shadow 0.18s, border 0.18s, background 0.18s, transform 0.18s;
+        }
+        .feature-link:focus .feature,
+        .feature-link:hover .feature {
+            box-shadow: 0 12px 32px rgba(0,113,227,0.13);
+            border: 1.5px solid var(--primary);
+            background: #f5faff;
+            outline: none;
+            transform: translateY(-6px) scale(1.03);
+        }
+        .feature-link:active .feature {
+            background: #e5f0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-icon">💡</div>
+        <div class="logo">Tax Advisor</div>
+        <div class="tagline">Your Smart, Effortless Tax Planning Companion</div>
+        <div class="description">
+            Experience a new standard in tax analysis. Upload your salary slip or Form 16, review your data, compare regimes, and get personalized, AI-powered investment advice—all in a few simple steps.
+        </div>
+        <div class="steps">
+            <div class="step"><span class="step-icon">📤</span> Upload PDF</div>
+            <div class="step"><span class="step-icon">📝</span> Review & Edit</div>
+            <div class="step"><span class="step-icon">⚖️</span> Compare Regimes</div>
+            <div class="step"><span class="step-icon">🤖</span> Get AI Advice</div>
+        </div>
+        <div class="features">
+            <a href="/upload" class="feature-link">
+            <div class="feature">
+                <h3>📄 Smart Upload</h3>
+                <p>Upload your salary slip or Form 16 for instant, secure data extraction.</p>
+            </div>
+            </a>
+            <a href="/upload" class="feature-link">
+            <div class="feature">
+                <h3>⚖️ Regime Comparison</h3>
+                <p>See a clear, side-by-side comparison of Old vs New tax regimes.</p>
+            </div>
+            </a>
+            <a href="/advisor-info" class="feature-link">
+            <div class="feature" style="border-bottom: 3px solid #34c759;">
+                <h3>🤖 AI Advisor</h3>
+                <p>Get actionable, personalized investment and tax-saving suggestions from Gemini AI.</p>
+            </div>
+            </a>
+        </div>
+        <div class="footer">
+            &copy; {{ 2025 }} Tax Advisor. Inspired by Apple design. Powered by AI.
+        </div>
+    </div>
+</body>
+</html> 
